@@ -1,9 +1,9 @@
 {
-    "rules"
+    "rules":
 
 
-    
     {
-        "selection-type-case": "lower"
+    
+        "selector-type-case": "lower"
     }
 }
