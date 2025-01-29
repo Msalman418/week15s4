@@ -1,0 +1,33 @@
+name: workflows cd-development
+on:
+  push:
+     branches:
+        -develop
+jobs:
+   cd-build-development-jobs:
+   runs on: ubuntu-latest
+   steps:
+     -name: checkout repo
+      uses: actions/checkout@v4
+     -name: create build artifacts
+       run:
+         npx parcel build "./src/index.html" --dist-dir  "./dist" --public-url "./"
+     -name: upload development artifacts
+      uses: actions/upload-pages-artifacts@v3
+      with:
+        path: "./dist"
+        name: "development-artifacts"
+
+        cd-deploy-development-job:
+          need: "cd-build-development-job"
+          environment: "development-env"
+          permission:
+            pages:write
+            id-token:write
+          run-on: ubuntu-latest
+          steps:
+            -name:depoy artifacts
+             uses: axtion/deploy-pages@v4
+             with:
+               artifact-name: "development-artifact"
+               token:  ${{github.token}}
