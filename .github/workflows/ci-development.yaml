@@ -1,11 +1,11 @@
-name:wf-ci-development
+name: wf-ci-development
 on:
 pull_request:
    branches:
      -develop
 jobs:
    ci-development-job:
-    runs-on:ubantu-latest
+    runs-on: ubantu-latest
     steps:
        -name: checkout Repo
         uses: action/checkout@v4
